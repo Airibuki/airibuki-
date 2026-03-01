@@ -257,15 +257,25 @@
           <option value="normal">通常タイプ 14,500円</option><option value="cleaning">お掃除機能付き 21,500円</option><option value="unknown">わからない</option>
         </select>
         <p style="color:#e53e3e; font-size: 0.85rem; font-weight: bold; margin-top: 8px;">※わからない場合は 通常タイプのエアコンで料金計算されます</p>
+        
+        <div class="info-box" style="margin-top: 15px;">
+          <strong>💡 お掃除機能の判別方法：</strong>
+          <ul style="margin: 8px 0 0 20px; padding: 0;">
+            <li>リモコンに「手動掃除」等のボタンがある</li>
+            <li>本体の奥行きが30cm以上ある</li>
+            <li>フィルターが簡単に取れない（取れるのが通常タイプ）</li>
+          </ul>
+        </div>
+
         <div class="accordion-btn" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open');">オプションメニューを追加する</div>
         <div class="accordion-body">
           <div class="option-list">
-            <label class="option-item"><input type="checkbox" class="option-checkbox" value="boukabi"><div class="option-content"><div class="option-title">防カビ加工 <span class="badge-popular">人気NO.1</span><span class="option-price-black">3,300円</span></div></div></label>
-            <label class="option-item"><input type="checkbox" class="option-checkbox" value="filter"><div class="option-content"><div class="option-title">抗菌フィルター <span class="option-price-black">2,750円</span></div></div></label>
-            <label class="option-item"><input type="checkbox" class="option-checkbox" value="drain"><div class="option-content"><div class="option-title">ドレンホース分解洗浄×ドレンパン洗浄 <span class="badge-popular badge-popular-2">人気NO.2</span><span class="option-price-black">5,500円</span></div></div></label>
-            <label class="option-item"><input type="checkbox" class="option-checkbox" value="cap"><div class="option-content"><div class="option-title">防虫キャップ <span class="option-price-black">2,750円</span></div></div></label>
-            <label class="option-item"><input type="checkbox" class="option-checkbox" value="outdoor"><div class="option-content"><div class="option-title">室外機洗浄 <span class="option-price-black">5,500円</span></div></div></label>
-            <label class="option-item consult-label"><input type="checkbox" class="option-checkbox" value="consult" onchange="toggleConsultText(this)"><div class="option-content"><div class="option-title">わからないから相談して決めたい</div></div></label>
+            <label class="option-item"><input type="checkbox" class="option-checkbox" value="boukabi"><div class="option-content"><div class="option-title">防カビ加工 <span class="badge-popular">人気NO.1</span><span class="option-price-black">3,300円</span></div><div class="option-desc">カビの発生を抑制する<br>防カビコーティングをエアコン内部にしてキレイ長持ち</div></div></label>
+            <label class="option-item"><input type="checkbox" class="option-checkbox" value="filter"><div class="option-content"><div class="option-title">抗菌フィルター <span class="option-price-black">2,750円</span></div><div class="option-desc">エアコンの上部につけるフィルター<br>ペットの毛やホコリが内部に入るのを防ぎお手入れが楽チン</div></div></label>
+            <label class="option-item"><input type="checkbox" class="option-checkbox" value="drain"><div class="option-content"><div class="option-title">ドレンホース分解洗浄×ドレンパン洗浄 <span class="badge-popular badge-popular-2">人気NO.2</span><span class="option-price-black">5,500円</span></div><div class="option-desc">アレルギーを持つ方、匂いが気になる方に超オススメ<br>水が一番溜まりやすい部分を分解して洗浄します、</div></div></label>
+            <label class="option-item"><input type="checkbox" class="option-checkbox" value="cap"><div class="option-content"><div class="option-title">防虫キャップ <span class="option-price-black">2,750円</span></div><div class="option-desc">排水管から虫の侵入を防ぐ<br>外につながるホースに網目上のキャップをつけます</div></div></label>
+            <label class="option-item"><input type="checkbox" class="option-checkbox" value="outdoor"><div class="option-content"><div class="option-title">室外機洗浄 <span class="option-price-black">5,500円</span></div><div class="option-desc">エアコンの効きが改善に効果的<br>室外機を分解して洗浄する</div></div></label>
+            <label class="option-item consult-label"><input type="checkbox" class="option-checkbox" value="consult" onchange="toggleConsultText(this)"><div class="option-content"><div class="option-title">わからないから相談して決めたい</div><div class="option-desc">オプションについて、当日にスタッフと相談して決めることができます。</div></div></label>
             <div class="consult-text-group hidden"><textarea class="consult-text" placeholder="気になる点や相談したい内容をご記入ください"></textarea></div>
           </div>
         </div>
