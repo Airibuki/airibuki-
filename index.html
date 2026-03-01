@@ -73,14 +73,12 @@
 </head>
 <body>
   <div class="container">
-    
     <div id="step1">
       <h1 class="title">エアイブキ かんたん見積もり</h1>
       <div id="ac-list">
         <div class="ac-item" id="ac-block-1">
           <span class="ac-header">エアコン 1台目</span>
           <label class="input-label">エアコンのタイプ</label>
-          
           <div class="plan-images">
             <div class="plan-card selected" id="card-normal-1" onclick="selectType(1,'normal')">
               <img src="https://i.imgur.com/rnfPxwk.jpg" alt="通常タイプ">
@@ -91,14 +89,12 @@
               <small>お掃除機能付き<br>21,500円</small>
             </div>
           </div>
-          
           <select class="type-sel" id="sel-type-1" onchange="syncUI(1, this.value)" style="margin-top: 10px;">
             <option value="normal">通常タイプ 14,500円</option>
             <option value="cleaning">お掃除機能付き 21,500円</option>
             <option value="unknown">わからない</option>
           </select>
           <p style="color:#e53e3e; font-size: 0.85rem; font-weight: bold; margin-top: 8px;">※わからない場合は 通常タイプのエアコンで料金計算されます</p>
-
           <div class="info-box" style="margin-top: 15px;">
             <strong>💡 お掃除機能の判別方法：</strong>
             <ul style="margin: 8px 0 0 20px; padding: 0;">
@@ -107,7 +103,6 @@
               <li>フィルターが簡単に取れない（取れるのが通常タイプ）</li>
             </ul>
           </div>
-
           <div class="accordion-btn" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open');">
             オプションメニューを追加する
           </div>
@@ -135,14 +130,13 @@
       <div style="background:#ebf8ff; border:1px solid #bee3f8; padding:15px; text-align:center; border-radius:10px; font-weight:bold; color:#2c5282; font-size: 0.95rem;">
         追加料金は一切かかりません。<br>設置場所や汚れ具合による加算はなし
       </div>
-      <button type="button" class="btn-main" onclick="goToStep(3)">LINEで仮予約の相談をする</button>
+      <button type="button" class="btn-main" onclick="goToStep(3)">LINEで予約の相談をする</button>
       <div class="btn-back" onclick="handleBack()">← 選び直す</div>
     </div>
 
     <div id="step3" class="hidden">
       <h1 class="title">お客様情報の入力</h1>
       <div class="privacy-policy-box" style="font-size:0.85rem; color:#4a5568; margin-bottom:15px; background:#f7fafc; padding:10px; border-radius:8px;">入力いただいた情報は、お見積もりのご連絡のためだけに使います。営業目的のご連絡や第三者提供はありませんのでご安心ください。</div>
-      
       <div style="margin-bottom:18px;"><label class="input-label" style="margin-top:0;">お名前</label><input type="text" id="u_name" placeholder="例：新潟 太郎"></div>
       <div style="margin-bottom:18px;"><label class="input-label">電話番号</label><input type="tel" id="u_tel" placeholder="例：09012345678"></div>
       <div style="margin-bottom:25px;"><label class="input-label">ご住所</label><input type="text" id="u_addr" placeholder="例：新潟市中央区...〇〇マンション101"></div>
@@ -279,7 +273,6 @@
       document.getElementById('ac-list').insertAdjacentHTML('beforeend', html);
     }
 
-    // ★ 写真入力枠を追加する関数
     function addFileInput(containerId, className) {
       const container = document.getElementById(containerId);
       const input = document.createElement('input');
@@ -324,7 +317,6 @@
       document.getElementById('c_time').innerText = globalEstimatedTime; document.getElementById('c_quote_details').innerHTML = htmlForConfirm; document.getElementById('c_total').innerText = document.getElementById('total-price').innerText + "円"; goToStep(4);
     }
 
-    // ★ 自動送信と複数写真処理のコア
     async function onComplete() {
       const btn = document.getElementById('btn-submit');
       btn.innerText = "送信処理中...（そのままお待ちください）";
@@ -349,12 +341,12 @@
         const maker = document.getElementById('u_maker').value;
         const total = document.getElementById('total-price').innerText;
 
-        // ★ 複数画像の処理
         let photosArray = [];
         const fileInputs = noPhoto ? document.querySelectorAll('.main-file') : document.querySelectorAll('.sticker-file');
         
-        for (let input of fileInputs) {
-          if (input.files && input.files[0]) {
+        for (let i = 0; i < fileInputs.length; i++) {
+          let input = fileInputs[i];
+          if (input.files && input.files.length > 0) {
             let file = input.files[0];
             let base64 = await new Promise((resolve) => {
               const reader = new FileReader();
@@ -369,17 +361,25 @@
           }
         }
 
-        let message = `【見積もり・仮予約依頼】\n\n■お客様情報\nお名前：${name} 様\n電話番号：${tel}\nご住所：${addr}\n\n■ご希望日時\n第1希望：${date1}\n第2希望：${date2}\n第3希望：${date3}\n\n■見積内容\n${summaryTextForLine}--------------------\n合計：${total}円\n作業目安時間：約${globalEstimatedTime}時間\n\n■相談したいこと\n${question || "なし"}\n\n`;
-        if (noPhoto) { message += `メーカー：${maker}\n${photosArray.length > 0 ? `※本体の写真はシステム経由で保存済みです。\n` : `※本体の写真は別途お送りください。\n`}`; } 
-        else { message += photosArray.length > 0 ? `※型番の写真はシステム経由で保存済みです。\n` : `※型番の写真は別途お送りください。\n`; }
-        message += `--------------------\n※この内容はシステムより自動送信されています。`;
+        let message = `【見積もり依頼】\nお名前：${name} 様\n電話番号：${tel}\nご住所：${addr}\n\n`;
+        message += `■ご希望日時\n第1希望：${date1}\n第2希望：${date2}\n第3希望：${date3}\n\n`;
+        message += `■見積内容\n${summaryTextForLine}合計：${total}円\n作業目安時間：約${globalEstimatedTime}時間\n\n`;
+        message += `■相談したいこと\n${question || "なし"}\n\n`;
+        
+        if (noPhoto) { 
+          message += `メーカー：${maker}\n`;
+          message += photosArray.length > 0 ? `※本体の写真はシステム経由で保存済みです。\n` : `※本体の写真は別途お送りください。\n`;
+        } else { 
+          message += photosArray.length > 0 ? `※型番の写真はシステム経由で保存済みです。\n` : `※型番の写真は別途お送りください。\n`;
+        }
+        message += `--------------------\n上記の内容で予約・相談を希望します。`;
 
         const payload = {
           userId: userId,
           messageText: message,
           name: name, tel: tel, addr: addr, date1: date1, date2: date2, date3: date3,
           quoteDetails: summaryTextForLine, question: question, totalPrice: total,
-          photos: photosArray // 配列で送信
+          photos: photosArray 
         };
 
         const response = await fetch(GAS_URL, {
