@@ -5,7 +5,6 @@
   <base target="_top">
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <style>
-    /* 元の美しいスマホぴったりデザイン（カード型）に戻しました！ */
     body { font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif; background-color: #f4f7f6; color: #333; margin: 0; padding: 10px; line-height: 1.6; -webkit-text-size-adjust: 100%; }
     .container { max-width: 500px; margin: 0 auto; background: #fff; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.05); padding: 20px; box-sizing: border-box; }
     
@@ -130,7 +129,8 @@
       <div id="quote-list" class="quote-box"></div>
       <div class="total-display">合計 <span id="total-price" class="price-red">0</span>円</div>
       <div style="background:#ebf8ff; border:1px solid #bee3f8; padding:15px; text-align:center; border-radius:10px; font-weight:bold; color:#2c5282; font-size: 0.95rem;">
-        表示価格は税込価格であり、追加料金は一切かかりません。<br>設置場所や汚れ具合による加算はなし
+        表示されてるのは<span style="color:#e53e3e;">税込</span>価格です<br>
+        追加料金は一切かかりません。<br>設置場所や汚れ具合による加算はなし
       </div>
       <button type="button" class="btn-main" onclick="goToStep(3)">LINEで予約の相談をする</button>
       <div class="btn-back" onclick="handleBack()">← 選び直す</div>
@@ -225,7 +225,7 @@
 
   <script>
     // ★★★ 以下の2箇所をご自身のものに書き換えてください ★★★
-    const LIFF_ID = "2008817045-BP7jc1xE";
+    const LIFF_ID = "2008817045-0yfL2KnG";
     const GAS_URL = "https://script.google.com/macros/s/AKfycbw_cjeK1s96jMMIhgQ9LA5SY_gX3MTkt0RWFwbV7Yq4CjUtVFjQyzIWDwUVqP7qXWm2PA/exec";
 
     let acCount = 1; let currentStep = 1; let globalEstimatedTime = 0; 
@@ -331,7 +331,6 @@
 
     async function onComplete() {
       const btn = document.getElementById('btn-submit');
-      // ★送信ボタンのテキストを変更
       btn.innerText = "送信中...（完了まで10秒ほどかかります）";
       btn.disabled = true;
       btn.classList.remove('btn-pulse');
@@ -379,12 +378,10 @@
         message += `■見積内容\n${summaryTextForLine}合計：${total}円\n作業目安時間：約${globalEstimatedTime}時間\n\n`;
         message += `■相談したいこと\n${question || "なし"}\n\n`;
         
-        // ★写真に関する自動メッセージの削除
         if (noPhoto) { 
           message += `メーカー：${maker}\n\n`;
         }
         
-        // ★締めの文章の書き換え
         message += `--------------------\n上記の内容で仮予約を承りました。\n担当者から日程調整の連絡が公式ラインから届きます。\n日程確定後、予約完了とし作業日にお伺いさせていただきます。`;
 
         const payload = {
