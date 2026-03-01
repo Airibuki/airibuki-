@@ -5,8 +5,10 @@
   <base target="_top">
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <style>
-    body { font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif; background-color: #f4f7f6; color: #333; margin: 0; padding: 10px; line-height: 1.6; -webkit-text-size-adjust: 100%; }
-    .container { max-width: 500px; margin: 0 auto; background: #fff; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.05); padding: 20px; box-sizing: border-box; }
+    /* 全画面表示用のスタイル変更（bodyとcontainerの余白・背景色を修正） */
+    body { font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif; background-color: #fff; color: #333; margin: 0; padding: 0; line-height: 1.6; -webkit-text-size-adjust: 100%; }
+    .container { max-width: 100%; margin: 0 auto; background: #fff; border-radius: 0; box-shadow: none; padding: 20px 15px; box-sizing: border-box; }
+    
     .title { color: #2ecc71; text-align: center; font-size: 1.4rem; margin-bottom: 24px; border-bottom: 3px solid #f0fdf4; padding-bottom: 12px; font-weight: bold; }
     .ac-item { border: 2px solid #edf2f7; border-radius: 12px; padding: 18px; margin-bottom: 20px; background: #ffffff; }
     .ac-header { font-weight: bold; color: #2ecc71; margin-bottom: 15px; display: block; font-size: 1.1rem; border-left: 5px solid #2ecc71; padding-left: 10px; }
@@ -329,7 +331,6 @@
 
     async function onComplete() {
       const btn = document.getElementById('btn-submit');
-      // ★送信ボタンのテキストを変更
       btn.innerText = "送信中...（完了まで10秒ほどかかります）";
       btn.disabled = true;
       btn.classList.remove('btn-pulse');
@@ -377,12 +378,10 @@
         message += `■見積内容\n${summaryTextForLine}合計：${total}円\n作業目安時間：約${globalEstimatedTime}時間\n\n`;
         message += `■相談したいこと\n${question || "なし"}\n\n`;
         
-        // ★写真に関する自動メッセージの削除
         if (noPhoto) { 
           message += `メーカー：${maker}\n\n`;
         }
         
-        // ★締めの文章の書き換え
         message += `--------------------\n上記の内容で仮予約を承りました。\n担当者から日程調整の連絡が公式ラインから届きます。\n日程確定後、予約完了とし作業日にお伺いさせていただきます。`;
 
         const payload = {
