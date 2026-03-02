@@ -380,6 +380,14 @@
           userId = profile.userId;
         }
 
+        // ★★★ 秘密のテストモード追加 ★★★
+        // URLの最後に ?test=fail があれば、強制的にID取得失敗（Pattern 2）にする裏ワザ
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('test') === 'fail') {
+          userId = ""; 
+          console.log("テストモード作動：強制的にID取得失敗ルートへ進みます");
+        }
+
         const name = document.getElementById('u_name').value;
         const tel = document.getElementById('u_tel').value;
         const addr = document.getElementById('u_addr').value;
@@ -423,7 +431,7 @@
         message += `--------------------\n上記の内容で仮予約を承りました。\n担当者から日程調整の連絡が公式ラインから届きます。\n日程確定後、予約完了とし作業日にお伺いさせていただきます。`;
 
         const payload = {
-          userId: userId, // 取得失敗時は空文字が入ります
+          userId: userId, // 取得失敗時、またはテスト時は空文字が入ります
           messageText: message,
           name: name, tel: tel, addr: addr, date1: date1, date2: date2, date3: date3,
           quoteDetails: summaryTextForLine, question: question, totalPrice: total,
