@@ -13,12 +13,19 @@
     .ac-item { border: 2px solid #edf2f7; border-radius: 12px; padding: 18px; margin-bottom: 20px; background: #ffffff; }
     .ac-header { font-weight: bold; color: #2ecc71; margin-bottom: 15px; display: block; font-size: 1.1rem; border-left: 5px solid #2ecc71; padding-left: 10px; }
     .input-label { display: block; font-weight: bold; font-size: 0.95rem; margin: 15px 0 8px 0; color: #2d3748; }
-    .plan-images { display: flex; justify-content: space-between; align-items: stretch; gap: 8px; margin: 12px 0; }
-    .plan-card { width: 48%; text-align: center; cursor: pointer; border: 2px solid #e2e8f0; border-radius: 10px; overflow: hidden; transition: all 0.2s ease; display: flex; flex-direction: column; }
-    .plan-card img { width: 100%; height: 120px; object-fit: cover; display: block; }
-    .plan-card small { display: flex; align-items: center; justify-content: center; flex-grow: 1; padding: 8px 0; font-weight: bold; font-size: 0.85rem; background: #f8f9fa; line-height: 1.3; }
-    .plan-card.selected { border-color: #2ecc71; background-color: #f0fdf4; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(46, 204, 113, 0.2); }
-    .plan-card.selected small { background: #2ecc71; color: #fff; }
+    
+    /* 写真を大きく見せるためのワイドカード設定 */
+    .plan-images { display: flex; flex-direction: column; gap: 12px; margin: 12px 0; }
+    .plan-card { width: 100%; text-align: left; cursor: pointer; border: 2px solid #e2e8f0; border-radius: 12px; overflow: hidden; transition: all 0.2s ease; display: flex; align-items: center; background: #f8f9fa; }
+    .plan-card img { width: 40%; height: 100px; object-fit: cover; display: block; border-right: 1px solid #e2e8f0; }
+    .plan-card .card-info { width: 60%; padding: 10px 15px; }
+    .plan-card .card-info strong { display: block; font-size: 1rem; color: #2d3748; margin-bottom: 4px; }
+    .plan-card .card-info span { font-size: 0.9rem; color: #2ecc71; font-weight: bold; }
+    
+    .plan-card.selected { border-color: #2ecc71; background-color: #f0fdf4; transform: scale(1.02); box-shadow: 0 4px 12px rgba(46, 204, 113, 0.15); }
+    .plan-card.selected .card-info strong { color: #166534; }
+
+    /* 共通スタイル */
     .accordion-btn { display: flex; justify-content: space-between; align-items: center; background-color: #f8fafc; border: 1px solid #cbd5e0; border-radius: 8px; padding: 14px; font-weight: bold; color: #2d3748; cursor: pointer; margin-top: 25px; user-select: none; transition: background-color 0.2s; }
     .accordion-btn:hover { background-color: #edf2f7; }
     .accordion-btn::after { content: '▼'; font-size: 0.8rem; color: #718096; transition: transform 0.3s ease; }
@@ -84,11 +91,17 @@
           <div class="plan-images">
             <div class="plan-card selected" id="card-normal-1" onclick="selectType(1,'normal')">
               <img src="https://i.imgur.com/rnfPxwk.jpg" alt="通常タイプ">
-              <small>通常タイプ<br>14,500円</small>
+              <div class="card-info">
+                <strong>通常タイプ</strong>
+                <span>14,500円</span>
+              </div>
             </div>
             <div class="plan-card" id="card-cleaning-1" onclick="selectType(1,'cleaning')">
               <img src="https://i.imgur.com/lgveI9e.jpg" alt="お掃除機能付き">
-              <small>お掃除機能付き<br>21,500円</small>
+              <div class="card-info">
+                <strong>お掃除機能付き</strong>
+                <span>21,500円</span>
+              </div>
             </div>
           </div>
           <select class="type-sel" id="sel-type-1" onchange="syncUI(1, this.value)" style="margin-top: 10px;">
@@ -112,7 +125,7 @@
             <div class="option-list">
               <label class="option-item"><input type="checkbox" class="option-checkbox" value="boukabi"><div class="option-content"><div class="option-title">防カビ加工 <span class="badge-popular">人気NO.1</span><span class="option-price-black">3,300円</span></div><div class="option-desc">カビの発生を抑制する<br>防カビコーティングをエアコン内部にしてキレイ長持ち</div></div></label>
               <label class="option-item"><input type="checkbox" class="option-checkbox" value="filter"><div class="option-content"><div class="option-title">抗菌フィルター <span class="option-price-black">2,750円</span></div><div class="option-desc">エアコンの上部につけるフィルター<br>ペットの毛やホコリが内部に入るのを防ぎお手入れが楽チン</div></div></label>
-              <label class="option-item"><input type="checkbox" class="option-checkbox" value="drain"><div class="option-content"><div class="option-title">ドレンホース洗浄×ドレンパン分解洗浄 <span class="badge-popular badge-popular-2">人気NO.2</span><span class="option-price-black">5,500円</span></div><div class="option-desc">アレルギーを持つ方、匂いが気になる方に超オススメ<br>水が一番溜まりやすい部分を分解して洗浄します、</div></div></label>
+              <label class="option-item"><input type="checkbox" class="option-checkbox" value="drain"><div class="option-content"><div class="option-title">ドレンホース分解洗浄×ドレンパン洗浄 <span class="badge-popular badge-popular-2">人気NO.2</span><span class="option-price-black">5,500円</span></div><div class="option-desc">アレルギーを持つ方、匂いが気になる方に超オススメ<br>水が一番溜まりやすい部分を分解して洗浄します、</div></div></label>
               <label class="option-item"><input type="checkbox" class="option-checkbox" value="cap"><div class="option-content"><div class="option-title">防虫キャップ <span class="option-price-black">2,750円</span></div><div class="option-desc">排水管から虫の侵入を防ぐ<br>外につながるホースに網目上のキャップをつけます</div></div></label>
               <label class="option-item"><input type="checkbox" class="option-checkbox" value="outdoor"><div class="option-content"><div class="option-title">室外機洗浄 <span class="option-price-black">5,500円</span></div><div class="option-desc">エアコンの効きが改善に効果的<br>室外機を分解して洗浄する</div></div></label>
               <label class="option-item consult-label"><input type="checkbox" class="option-checkbox" value="consult" onchange="toggleConsultText(this)"><div class="option-content"><div class="option-title">わからないから相談して決めたい</div><div class="option-desc">オプションについて、当日にスタッフと相談して決めることができます。</div></div></label>
@@ -222,11 +235,22 @@
       <div style="font-size:0.8rem; color:#a0aec0; text-align:center; margin-top:8px;">予約はまだ完了していません</div>
       <div class="btn-back" onclick="handleBack()">← 入力内容を修正する</div>
     </div>
+
+    <div id="step5" class="hidden" style="text-align: center; padding: 20px 10px;">
+      <div style="font-size: 3.5rem; color: #2ecc71; margin-bottom: 10px;">✓</div>
+      <h2 style="color: #2d3748; margin-bottom: 25px; font-size: 1.5rem;">仮予約が完了しました</h2>
+      <div style="font-size: 1rem; color: #4a5568; line-height: 1.8; text-align: left; background: #f0fdf4; padding: 20px; border-radius: 12px; border: 1px solid #c6f6d5; font-weight: bold;">
+        1日以内にエアイブキ担当者から日程調整の連絡を公式ラインでします<br><br>
+        日程が確定次第、作業日にご自宅にお伺いします
+      </div>
+      <p style="font-size: 0.85rem; color: #718096; margin-top: 30px;">この画面は左上の「×」ボタン等で閉じてください。</p>
+    </div>
+
   </div>
 
   <script>
     // ★★★ 以下の2箇所をご自身のものに書き換えてください ★★★
-    const LIFF_ID = "2008817045-0yfL2KnG";
+    const LIFF_ID = "2008817045-BP7jc1xE";
     const GAS_URL = "https://script.google.com/macros/s/AKfycbw_cjeK1s96jMMIhgQ9LA5SY_gX3MTkt0RWFwbV7Yq4CjUtVFjQyzIWDwUVqP7qXWm2PA/exec";
 
     let acCount = 1; let currentStep = 1; let globalEstimatedTime = 0; 
@@ -236,8 +260,14 @@
 
     window.onload = function() { 
       history.replaceState({step: 1}, null, ""); 
-      liff.init({ liffId: LIFF_ID }).catch(err => console.error("LIFF Init Error: ", err));
+      // ★ログイン必須化の処理
+      liff.init({ liffId: LIFF_ID }).then(() => {
+        if (!liff.isLoggedIn()) {
+          liff.login();
+        }
+      }).catch(err => console.error("LIFF Init Error: ", err));
     };
+    
     window.onpopstate = function(event) { if (event.state && event.state.step) { showStep(event.state.step); } };
 
     function goToStep(s) { currentStep = s; history.pushState({step: s}, null, ""); showStep(s); }
@@ -253,8 +283,14 @@
         <span class="ac-header">エアコン ${acCount}台目</span>
         <label class="input-label">エアコンのタイプ</label>
         <div class="plan-images">
-          <div class="plan-card selected" id="card-normal-${acCount}" onclick="selectType(${acCount},'normal')"><img src="${TYPES['normal'].img}" alt="通常タイプ"><small>通常タイプ<br>14,500円</small></div>
-          <div class="plan-card" id="card-cleaning-${acCount}" onclick="selectType(${acCount},'cleaning')"><img src="${TYPES['cleaning'].img}" alt="お掃除機能付き"><small>お掃除機能付き<br>21,500円</small></div>
+          <div class="plan-card selected" id="card-normal-${acCount}" onclick="selectType(${acCount},'normal')">
+            <img src="${TYPES['normal'].img}" alt="通常タイプ">
+            <div class="card-info"><strong>通常タイプ</strong><span>14,500円</span></div>
+          </div>
+          <div class="plan-card" id="card-cleaning-${acCount}" onclick="selectType(${acCount},'cleaning')">
+            <img src="${TYPES['cleaning'].img}" alt="お掃除機能付き">
+            <div class="card-info"><strong>お掃除機能付き</strong><span>21,500円</span></div>
+          </div>
         </div>
         <select class="type-sel" id="sel-type-${acCount}" onchange="syncUI(${acCount}, this.value)" style="margin-top: 10px;">
           <option value="normal">通常タイプ 14,500円</option><option value="cleaning">お掃除機能付き 21,500円</option><option value="unknown">わからない</option>
@@ -338,6 +374,7 @@
 
       try {
         let userId = "";
+        // ★ ID取得を試みる
         if (liff.isLoggedIn()) {
           const profile = await liff.getProfile();
           userId = profile.userId;
@@ -386,7 +423,7 @@
         message += `--------------------\n上記の内容で仮予約を承りました。\n担当者から日程調整の連絡が公式ラインから届きます。\n日程確定後、予約完了とし作業日にお伺いさせていただきます。`;
 
         const payload = {
-          userId: userId,
+          userId: userId, // 取得失敗時は空文字が入ります
           messageText: message,
           name: name, tel: tel, addr: addr, date1: date1, date2: date2, date3: date3,
           quoteDetails: summaryTextForLine, question: question, totalPrice: total,
@@ -402,11 +439,20 @@
         const result = await response.json();
 
         if (result.status === "success") {
-          if (liff.isInClient()) {
-            liff.closeWindow(); 
+          // ★ 分岐処理
+          if (userId) {
+            // パターン1：ID取得成功（今まで通り画面を閉じる）
+            if (liff.isInClient()) {
+              liff.closeWindow(); 
+            } else {
+              alert("送信が完了しました。タブを閉じてください。");
+              btn.innerText = "送信完了";
+            }
           } else {
-            alert("送信が完了しました。タブを閉じてください。");
-            btn.innerText = "送信完了";
+            // パターン2：ID取得失敗（新設した完了画面を表示する）
+            document.getElementById('step4').classList.add('hidden');
+            document.getElementById('step5').classList.remove('hidden');
+            window.scrollTo(0, 0);
           }
         } else {
           throw new Error(result.message || "送信に失敗しました");
